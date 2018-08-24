@@ -22,3 +22,9 @@ it('should keep a dead cell dead if they have more than 3 live neighbors (overpo
     currentCell.aliveNeighbors(4);
     expect(currentCell.isAlive()).toEqual(false);
 });
+
+it('should make a dead cell become alive if the cell has exactly 3 live neighbors (reproduction)', () => {
+    var currentCell = new Cell(false);
+    currentCell.aliveNeighbors(3);
+    expect(currentCell.isAlive()).toEqual(true);
+});

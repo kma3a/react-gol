@@ -11,6 +11,9 @@ class Cell {
     if(numberOfLiveNeighbors < 2 || numberOfLiveNeighbors > 3) {
       this.alive = false;
     }
+    if( !this.alive && numberOfLiveNeighbors === 3) {
+      this.alive = true;
+    }
   }
 }
 
