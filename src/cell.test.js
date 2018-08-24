@@ -5,8 +5,20 @@ it('should return live if initalized to live', () => {
     expect(currentCell.isAlive()).toEqual(true);
 });
 
-it('should die if it has less than 2 live neighbors', () => {
+it('should kill a live cell if it has less than 2 live neighbors (underpopulation)', () => {
     var currentCell = new Cell(true);
     currentCell.aliveNeighbors(1);
+    expect(currentCell.isAlive()).toEqual(false);
+});
+
+it('should kill a live cell if the neightbors have more than 3 live neighbors (overpopulation)', () => {
+    var currentCell = new Cell(true);
+    currentCell.aliveNeighbors(4);
+    expect(currentCell.isAlive()).toEqual(false);
+});
+
+it('should keep a dead cell dead if they have more than 3 live neighbors (overpopulation)', () => {
+    var currentCell = new Cell(false);
+    currentCell.aliveNeighbors(4);
     expect(currentCell.isAlive()).toEqual(false);
 });

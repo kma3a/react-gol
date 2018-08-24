@@ -8,7 +8,7 @@ class Cell {
   }
 
   aliveNeighbors(numberOfLiveNeighbors) {
-    if(numberOfLiveNeighbors < 2) {
+    if(numberOfLiveNeighbors < 2 || numberOfLiveNeighbors > 3) {
       this.alive = false;
     }
   }
