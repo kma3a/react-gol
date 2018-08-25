@@ -1,10 +1,13 @@
+import React from 'react';
+
 class Cell {
   constructor(alive){
     this.alive = alive;
   }
   //will return if the square is Alive or not
-  isAlive() {
-    return this.alive;
+  renderedDoc() {
+    var cName = this.alive ? 'alive' : '';
+    return ( <div className={cName}></div>);
   }
 
   aliveNeighbors(numberOfLiveNeighbors) {
