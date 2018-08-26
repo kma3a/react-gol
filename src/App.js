@@ -4,18 +4,13 @@ import Board from './board.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    var madeBoard = new Board();
-    madeBoard.createBoard();
-    console.log("I am the board", madeBoard);
 
     this.state = {
-      board: madeBoard,
-      boardImage: madeBoard.showBoard()
+      board: null
     };
   }
 
   evolve() {
-    console.log("state", this.state);
     const currentBoard = this.state.board;
     currentBoard.updateBoard();
     this.setState({
@@ -23,11 +18,39 @@ class App extends React.Component {
     });
   }
 
+  generateBoard(number) {
+    var madeBoard = new Board(number);
+    madeBoard.createBoard();
+    this.setState({
+      board: madeBoard,
+      boardImage: madeBoard.showBoard()
+    });
+
+  }
+
+  makeBoard() {
+    return (
+      <div className='boardGenerate'>
+        <button onClick={()=>{this.generateBoard(9)}}> create 3 X 3 </button>
+        <button onClick={()=>{this.generateBoard(81)}}> create 9 X 9 </button>
+      </div>
+    );
+  }
+
+  showBoard() {
+    return (
+      <div className="board">
+        {this.state.boardImage}
+        <button onClick={()=>{this.evolve()}}> Next Gen </button>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="App">
-        {this.state.boardImage}
-        <button onClick={()=>{this.evolve()}}> Next Gen </button>
+        { !this.state.board ? this.makeBoard() : null}
+        { this.state.board ? this.showBoard() : null}
       </div>
     );
   }
