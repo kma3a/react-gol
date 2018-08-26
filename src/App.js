@@ -8,7 +8,6 @@ class App extends Component {
     const currentBoard = new Board();
     currentBoard.createBoard();
     var board = currentBoard.showBoard();
-    console.log(board);
     return (
       <div className="App">
         {board}

@@ -3,10 +3,10 @@ import Cell from './cell.js';
 
 
 class Board {
-  constructor() {
+  constructor(prebuiltBoard) {
     this.boardSize = 9;
     this.sqroot = Math.sqrt(this.boardSize);
-    this.board = [];
+    this.board = prebuiltBoard || [];
   }
 
   createBoard() {
@@ -25,12 +25,24 @@ class Board {
     this.board.push(row);
   }
 
+  //x in this case will be the row
+  //y will be the column
+  checkNeighbors(index) {
+    var neightborList = [
+      {x:-1, y:-1}, {x:0, y:-1},{x:1, y:-1},
+      {x:0, y:-1}, null,{x:1, y:1},
+      {x:1,  y:-1}, {x:0, y:1},{x:1, y:1} 
+    ];
+
+
+
+  }
+
   renderRow(row) {
     var oneRow = [];
      row.map((thisCell) => {
           oneRow.push(this.renderCell(thisCell));
       })
-     console.log(oneRow);
      return (
          <div class='row'>
            {oneRow}
