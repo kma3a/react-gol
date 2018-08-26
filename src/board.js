@@ -4,10 +4,22 @@ import Cell from './cell.js';
 
 class Board {
   constructor(prebuiltBoard) {
-    this.boardSize = 9;
+    this.boardSize = this.getBoardSize(prebuiltBoard);
     this.sqroot = Math.sqrt(this.boardSize);
-    this.board = prebuiltBoard || [];
+    this.board = prebuiltBoard && Array.isArray(prebuiltBoard) ? prebuiltBoard : [];
     this.neighborBoard = [];
+  }
+
+  getBoardSize(board) {
+    var size = 9
+    if(Array.isArray(board)) {
+
+      size = board.length * board.length;
+    }
+    if(typeof board === 'number') {
+      size = board;
+    }
+    return size;
   }
 
   createBoard() {
@@ -37,7 +49,6 @@ class Board {
        }); 
       });
     });
-    console.log("neightbor board", this.neighborBoard);
     this.updateNeighbors();
   }
   
@@ -47,7 +58,6 @@ class Board {
       return this.board[index.x][index.y].aliveNeighbors(cellInfo.neighbors);
     });
 
-    console.log("updated", this.board);
   }
 
   //x in this case will be the row
