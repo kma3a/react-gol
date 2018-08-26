@@ -8,41 +8,47 @@ class Board {
     this.sqroot = Math.sqrt(this.boardSize);
     this.board = [];
   }
+
   createBoard() {
     var randomInt = (max) => { return Math.floor(Math.random() * Math.floor(max));}
+    var row =[];
 
     for(var i=0; i < this.boardSize; i++) {
+      if( i % this.sqroot === 0 && row.length > 0) {
+        this.board.push(row);
+        row = [];
+      }
+      var rowIndex = i %  this.sqroot;
       var trueOrFalse = !!randomInt(2);
-      this.board[i] = new Cell(trueOrFalse);
+      row[rowIndex] = new Cell(trueOrFalse);
     }
+    this.board.push(row);
   }
 
-  getCell(index) {
-    return this.board[index].renderedDoc();
+  renderRow(row) {
+    var oneRow = [];
+     row.map((thisCell) => {
+          oneRow.push(this.renderCell(thisCell));
+      })
+     console.log(oneRow);
+     return (
+         <div class='row'>
+           {oneRow}
+         </div>
+     );
   }
-
+  renderCell(cell) {
+    return (cell.renderedDoc());
+  }
 
   showBoard() {
+    var boardRows =[];
+    this.board.map((row) => { boardRows.push(this.renderRow(row))});
     return (
-        <div class="board">
-          <div class="row">
-            {this.getCell(0)}
-            {this.getCell(1)}
-            {this.getCell(2)}
-          </div>
-          <div class="row">
-            {this.getCell(3)}
-            {this.getCell(4)}
-            {this.getCell(5)}
-          </div>
-          <div class="row">
-            {this.getCell(6)}
-            {this.getCell(7)}
-            {this.getCell(8)}
-          </div>
-        </div>
-      );
-
+      <div class="board">
+        {boardRows}
+      </div>
+    );
   }
 
 }
