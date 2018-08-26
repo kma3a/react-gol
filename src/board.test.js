@@ -29,6 +29,7 @@ it('should return the amount of neightbors that is there more than one alive', (
 
     expect(currentBoard.countNeighbors({x:0, y:0})).toEqual(0);
     expect(currentBoard.countNeighbors({x:1, y:1})).toEqual(4);
+    expect(currentBoard.countNeighbors({x:1, y:2})).toEqual(1);
 });
 
 it('should kill the one live cell for having no neightbors', ()=>{

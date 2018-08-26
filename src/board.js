@@ -24,26 +24,30 @@ class Board {
       row[rowIndex] = new Cell(trueOrFalse);
     }
     this.board.push(row);
+    row = [];
+    return;
   }
 
-  getListOfNeighbors() {
+  updateBoard() {
     this.board.forEach((row, indexX) => {
-      row.forEach((cell, indexY)=>{
-       this.neighborBoard.push({
+      return row.forEach((cell, indexY)=>{
+       return this.neighborBoard.push({
           index: {x: indexX, y: indexY}, 
           neighbors: this.countNeighbors({x: indexX, y: indexY})
        }); 
       });
     });
+    console.log("neightbor board", this.neighborBoard);
+    this.updateNeighbors();
   }
-
-  updateBoard() {
-    this.getListOfNeighbors();
+  
+  updateNeighbors() {
     this.neighborBoard.forEach((cellInfo)=>{
       var index = cellInfo.index;
-      this.board[index.x][index.y].aliveNeighbors(cellInfo.neighbors);
+      return this.board[index.x][index.y].aliveNeighbors(cellInfo.neighbors);
     });
 
+    console.log("updated", this.board);
   }
 
   //x in this case will be the row
@@ -51,9 +55,9 @@ class Board {
   countNeighbors(index) {
     var aliveNeighborCount = 0;
     var neighborList = [
-      {x:-1, y:-1}, {x:0, y:-1},{x:1, y:-1},
-      {x:0, y:-1}, null,{x:1, y:1},
-      {x:1,  y:-1}, {x:0, y:1},{x:1, y:1} 
+      {x:-1, y:-1}, {x:-1, y:0},{x:-1, y:1},
+      {x:0, y:-1}, null , {x:0, y:1},
+      {x:1,  y:-1}, {x:1, y:0},{x:1, y:1} 
     ];
 
     neighborList.forEach((cellCoord) => {
