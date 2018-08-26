@@ -4,6 +4,7 @@ import Board from './board.js';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.timeoutID = null;
 
     this.state = {
       board: null
@@ -38,10 +39,10 @@ class App extends React.Component {
   }
 
   showBoard() {
+    this.timeoutID = setTimeout(() => {return this.evolve();}, 750);
     return (
       <div className="board">
         {this.state.boardImage}
-        <button onClick={()=>{this.evolve()}}> Next Gen </button>
       </div>
     );
   }
