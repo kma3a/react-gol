@@ -9,15 +9,15 @@ the game of life rules:
 4. Any dead cell with exactly 2 live neighbors becomes alive
 
 ### start the program
+to get all the dependecies down run:
 ```
 npm install
 ```
-to get all the dependecies down.
 
+to start the program in your browser run:
 ```
 npm start
 ```
-this will start the program in your browser
 
 ### tests
 to run the tests run
