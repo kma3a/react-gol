@@ -96,7 +96,7 @@ class Board {
         oneRow.push(this.renderCell(thisCell, uniqueKey));
       })
      return (
-         <div key={otherIndex} className='row'>
+         <div class='row'>
            {oneRow}
          </div>
      );
@@ -107,9 +107,9 @@ class Board {
 
   showBoard() {
     var boardRows =[];
-    this.board.map((row,index) => { boardRows.push(this.renderRow(row, index))});
+    this.board.map((row,index) => { boardRows.push(this.renderRow(row))});
     return (
-      <div className="board">
+      <div class="board">
         {boardRows}
       </div>
     );

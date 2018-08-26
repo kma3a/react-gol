@@ -5,9 +5,9 @@ class Cell {
     this.alive = alive;
   }
   //will return if the square is Alive or not
-  renderedDoc() {
+  renderedDoc(uniqueKey) {
     var cName = this.alive ? 'alive' : '';
-    return ( <div className={cName}></div>);
+    return ( <div key={uniqueKey} className={cName}></div>);
   }
 
   aliveNeighbors(numberOfLiveNeighbors) {
