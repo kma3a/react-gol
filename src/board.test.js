@@ -14,7 +14,7 @@ it('should show the prebuild board if one is passed in', ()=>{
     expect(currentBoard.showBoard().props.children[0].props.children[0].props.className).toEqual('alive');
 });
 
-it('should return the amount of neightbors that is there', ()=>{
+it('should return the amount of neightbors that is there only one alive', ()=>{
   var liveSquares = [0];
     var board = createBoard(liveSquares);
     const currentBoard = new Board(board);
@@ -22,16 +22,22 @@ it('should return the amount of neightbors that is there', ()=>{
     expect(currentBoard.countNeighbors({x:1, y:1})).toEqual(1);
 });
 
+it('should return the amount of neightbors that is there more than one alive', ()=>{
+  var liveSquares = [0, 2, 5,6];
+    var board = createBoard(liveSquares);
+    const currentBoard = new Board(board);
 
+    expect(currentBoard.countNeighbors({x:0, y:0})).toEqual(0);
+    expect(currentBoard.countNeighbors({x:1, y:1})).toEqual(4);
+});
 
-xit('should kill the one live cell for having no neightbors', ()=>{
+it('should kill the one live cell for having no neightbors', ()=>{
   var liveSquares = [0];
     var board = createBoard(liveSquares);
     const currentBoard = new Board(board);
     currentBoard.updateBoard();
     expect(currentBoard.showBoard().props.children[0].props.children[0].props.className).toEqual('');
 });
-
 
 function createBoard(liveSquares) {
   var tempBoard = [];

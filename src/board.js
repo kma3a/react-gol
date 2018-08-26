@@ -7,6 +7,7 @@ class Board {
     this.boardSize = 9;
     this.sqroot = Math.sqrt(this.boardSize);
     this.board = prebuiltBoard || [];
+    this.neighborBoard = [];
   }
 
   createBoard() {
@@ -23,6 +24,26 @@ class Board {
       row[rowIndex] = new Cell(trueOrFalse);
     }
     this.board.push(row);
+  }
+
+  getListOfNeighbors() {
+    this.board.forEach((row, indexX) => {
+      row.forEach((cell, indexY)=>{
+       this.neighborBoard.push({
+          index: {x: indexX, y: indexY}, 
+          neighbors: this.countNeighbors({x: indexX, y: indexY})
+       }); 
+      });
+    });
+  }
+
+  updateBoard() {
+    this.getListOfNeighbors();
+    this.neighborBoard.forEach((cellInfo)=>{
+      var index = cellInfo.index;
+      this.board[index.x][index.y].aliveNeighbors(cellInfo.neighbors);
+    });
+
   }
 
   //x in this case will be the row
