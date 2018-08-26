@@ -27,15 +27,31 @@ class Board {
 
   //x in this case will be the row
   //y will be the column
-  checkNeighbors(index) {
-    var neightborList = [
+  countNeighbors(index) {
+    var aliveNeighborCount = 0;
+    var neighborList = [
       {x:-1, y:-1}, {x:0, y:-1},{x:1, y:-1},
       {x:0, y:-1}, null,{x:1, y:1},
       {x:1,  y:-1}, {x:0, y:1},{x:1, y:1} 
     ];
 
+    neighborList.forEach((cellCoord) => {
+        if(!cellCoord) { return;}
+        var neighborX = index.x + cellCoord.x;
+        var neighborY = index.y + cellCoord.y;
+        //will return if the item is out of bounds
+        if( neighborX < 0 || neighborY < 0 || neighborX > (this.sqroot -1 ) || neighborY > (this.sqroot - 1)) {
+          return;
+        }
 
+        var square = this.board[neighborX][neighborY];
+        if(square.alive) {
+          aliveNeighborCount++;
+        }
 
+    });
+
+    return aliveNeighborCount;
   }
 
   renderRow(row) {

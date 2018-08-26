@@ -14,13 +14,31 @@ it('should show the prebuild board if one is passed in', ()=>{
     expect(currentBoard.showBoard().props.children[0].props.children[0].props.className).toEqual('alive');
 });
 
+it('should return the amount of neightbors that is there', ()=>{
+  var liveSquares = [0];
+    var board = createBoard(liveSquares);
+    const currentBoard = new Board(board);
+    expect(currentBoard.countNeighbors({x:0, y:0})).toEqual(0);
+    expect(currentBoard.countNeighbors({x:1, y:1})).toEqual(1);
+});
+
+
+
+xit('should kill the one live cell for having no neightbors', ()=>{
+  var liveSquares = [0];
+    var board = createBoard(liveSquares);
+    const currentBoard = new Board(board);
+    currentBoard.updateBoard();
+    expect(currentBoard.showBoard().props.children[0].props.children[0].props.className).toEqual('');
+});
+
+
 function createBoard(liveSquares) {
   var tempBoard = [];
   var row = [];
   
   for(var i = 0; i < 9; i++) {
     var alive = liveSquares.indexOf(i) > -1;
-    console.log(alive);
     if(i%3===0 && row.length >0) {
       tempBoard.push(row);
       row = [];
